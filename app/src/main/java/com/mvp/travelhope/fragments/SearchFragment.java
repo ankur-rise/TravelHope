@@ -60,11 +60,11 @@ public class SearchFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             boolean recommendation = bundle.getBoolean(KEY_RECOMMENDATION);
-            if (!recommendation) {
+            if (recommendation) {
                 view.findViewById(R.id.iv_nav).setVisibility(View.GONE);
                 view.findViewById(R.id.et_destination).setVisibility(View.GONE);
                 Button btnText = (Button) view.findViewById(R.id.btn_search);
-                btnText.setText(getString(R.string.show_detail));
+                btnText.setText(getString(R.string.show_option));
             }
         }
 

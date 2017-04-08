@@ -9,4 +9,5 @@
     <string name="plz_enter_origin">Please enter the origin</string>
     <string name="plz_enter_destination">Please enter the destination</string>
     <string name="show_detail">Show Trip deatil</string>
+    <string name="show_option">Show me options</string>
 </resources>
