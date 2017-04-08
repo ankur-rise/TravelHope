@@ -10,4 +10,5 @@
     <string name="plz_enter_destination">Please enter the destination</string>
     <string name="show_detail">Show Trip deatil</string>
     <string name="show_option">Show me options</string>
+    <string name="err_01_no_network">Error in connecting to server</string>
 </resources>
