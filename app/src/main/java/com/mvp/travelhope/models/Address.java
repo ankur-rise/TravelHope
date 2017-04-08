@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 public class Address {
-    @SerializedName("")
+    @SerializedName("value")
     private List<City> cityList;
 
     public void Address() {

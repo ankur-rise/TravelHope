@@ -99,7 +99,8 @@ public class NetworkRequest<T> extends Request<T> {
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         try {
             String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-
+                if(json.startsWith("["))
+                    json = "{value:"+json+"}";
             AppLogger.i(NetworkRequest.class.getSimpleName(), mClass.getSimpleName()+" response: "+json);
 //          writeResponseToFile(json);
 

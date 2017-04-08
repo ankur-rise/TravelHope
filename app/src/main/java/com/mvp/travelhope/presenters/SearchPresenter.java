@@ -10,6 +10,7 @@ import com.mvp.travelhope.network.NWHelper;
 import com.mvp.travelhope.network.NetworkInterface;
 import com.mvp.travelhope.network.NetworkListener;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -35,8 +36,10 @@ public class SearchPresenter implements SearchContract.Presenter {
             @Override
             public void onSuccess(Address response, int reqType) {
                 List<City> cityList = response.getCityList();
-                if (cityList != null) {
-                    Log.i("Searchpresenter", "cities" + cityList.size());
+                if (isOrigin) {
+                        mView.updateOriginCityList(cityList);
+                } else {
+                    mView.updateDestinationCityList(cityList);
                 }
             }
 
@@ -44,7 +47,7 @@ public class SearchPresenter implements SearchContract.Presenter {
             public void onError(String response, int reqType) {
 
             }
-        }, String.format(URL, text), Address.class, null, -1, null);
+        }, String.format(URL, text), Address.class, new HashMap<String, String>(), -1, null);
 
     }
 }
