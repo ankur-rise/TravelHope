@@ -6,7 +6,7 @@
                 tools:context="com.mvp.travelhope.fragments.SearchFragment">
 
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/et_origin"
         style="@style/search_edit_text"
         android:hint="@string/plz_enter_origin"
@@ -22,7 +22,7 @@
         android:src="@drawable/ic_more_vert_black_24dp"
         android:tint="@color/colorPrimary"/>
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/et_destination"
         style="@style/search_edit_text"
         android:layout_below="@+id/iv_nav"
