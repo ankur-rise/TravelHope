@@ -2,27 +2,28 @@ package com.mvp.travelhope.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 import com.mvp.travelhope.R;
+import com.mvp.travelhope.contracts.SearchContract;
+import com.mvp.travelhope.presenters.SearchPresenter;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SearchFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * A simple {@link Fragment} subclass. Avail user search options
  */
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements SearchContract.View {
     private static final String KEY_RECOMMENDATION = "recommendations";
     private OnFragmentInteractionListener mListener;
+    private AutoCompleteTextView mOrigin, mDestination;
+    private SearchPresenter mPresenter;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -46,6 +47,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPresenter = new SearchPresenter(this);
     }
 
     @Override
@@ -68,13 +70,10 @@ public class SearchFragment extends Fragment {
             }
         }
 
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        mOrigin = (AutoCompleteTextView) view.findViewById(R.id.et_origin);
+        mOrigin.addTextChangedListener(mOriginTextWatcher);
+        mDestination = (AutoCompleteTextView) view.findViewById(R.id.et_destination);
+        mDestination.addTextChangedListener(mDestinationTextWatcher);
     }
 
     @Override
@@ -93,6 +92,40 @@ public class SearchFragment extends Fragment {
         mListener = null;
     }
 
+    private TextWatcher mOriginTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mPresenter.searchForText(true);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    private TextWatcher mDestinationTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            mPresenter.searchForText(false);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -104,7 +137,6 @@ public class SearchFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction();
     }
 }
