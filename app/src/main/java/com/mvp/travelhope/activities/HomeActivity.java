@@ -1,5 +1,6 @@
 package com.mvp.travelhope.activities;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,12 +11,12 @@ import com.mvp.travelhope.fragments.HomeFragment;
 import com.mvp.travelhope.R;
 import com.mvp.travelhope.fragments.SearchFragment;
 
-public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener {
+public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, SearchFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.content_home);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
@@ -49,7 +50,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         return super.onOptionsItemSelected(item);
     }
 
-    // argument recommendation is to define type of search like if true the we'll show user to choose origin and on
+    // callback from HomeFragment argument recommendation is to define type of search like if true the we'll show user to choose origin and on
     // behalf of that we'll show a list of destination nearby if false then user know where to go.
     @Override
     public void onOptionSelected(boolean recommendation) {
@@ -57,8 +58,12 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     }
 
     private void inflateSearchFragment(boolean recommendation) {
-
         getFragmentManager().beginTransaction().replace(R.id.container, SearchFragment.newInstance(recommendation))
                 .addToBackStack(null).commit();
+    }
+// callback from Searchfragment
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

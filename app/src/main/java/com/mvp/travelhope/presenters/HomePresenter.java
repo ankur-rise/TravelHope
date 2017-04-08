@@ -15,7 +15,7 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     public void gotoOption() {
-
+        mView.moveToOption(mView.getRecommendation());
     }
 
 

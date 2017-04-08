@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
 
     @Override
     public void moveToOption(boolean recommendation) {
-            mListener.onOptionSelected(isResumed());
+            mListener.onOptionSelected(recommendation);
     }
 
     /**
