@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">TravelHope</string>
     <string name="action_settings">Settings</string>
+    <string name="place_near_me">Places to visit near me</string>
+    <string name="direct_search">Direct Search</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
