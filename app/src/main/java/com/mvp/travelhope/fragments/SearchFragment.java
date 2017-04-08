@@ -18,6 +18,7 @@ import com.mvp.travelhope.contracts.SearchContract;
 import com.mvp.travelhope.models.City;
 import com.mvp.travelhope.presenters.SearchPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,6 +31,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
     private AutoCompleteTextView mOrigin, mDestination;
     private SearchPresenter mPresenter;
     private CityAdapter mOriginCityAdapter, mDestinationCityAdapter;
+    private List<City> mOriginCityList;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -53,6 +55,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mOriginCityList = new ArrayList<>();
         mPresenter = new SearchPresenter(this, getActivity());
     }
 
@@ -134,10 +137,14 @@ public class SearchFragment extends Fragment implements SearchContract.View {
 
     @Override
     public void updateOriginCityList(List<City> cityList) {
+        if (mOriginCityList.size() > 0) {
+            mOriginCityList.clear();
+        }
+        mOriginCityList.addAll(cityList);
         if (mOriginCityAdapter == null) {
-            mOriginCityAdapter = new CityAdapter(cityList, getActivity());
+            mOriginCityAdapter = new CityAdapter(mOriginCityList, getActivity());
             mOrigin.setAdapter(mOriginCityAdapter);
-        }else{
+        } else {
             mOriginCityAdapter.notifyDataSetChanged();
         }
 
@@ -149,7 +156,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
         if (mDestinationCityAdapter == null) {
             mDestinationCityAdapter = new CityAdapter(cityList, getActivity());
             mOrigin.setAdapter(mDestinationCityAdapter);
-        }else{
+        } else {
             mDestinationCityAdapter.notifyDataSetChanged();
         }
     }

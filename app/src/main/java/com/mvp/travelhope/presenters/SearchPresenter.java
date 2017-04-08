@@ -37,10 +37,12 @@ public class SearchPresenter implements SearchContract.Presenter {
             public void onSuccess(Address response, int reqType) {
                 List<City> cityList = response.getCityList();
                 assert cityList!=null;
-                if (isOrigin) {
+                if(cityList!=null) {
+                    if (isOrigin) {
                         mView.updateOriginCityList(cityList);
-                } else {
-                    mView.updateDestinationCityList(cityList);
+                    } else {
+                        mView.updateDestinationCityList(cityList);
+                    }
                 }
             }
 
