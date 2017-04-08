@@ -16,8 +16,8 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
 
         inflateFragment();
@@ -57,6 +57,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     }
 
     private void inflateSearchFragment(boolean recommendation) {
+
         getFragmentManager().beginTransaction().replace(R.id.container, SearchFragment.newInstance(recommendation))
                 .addToBackStack(null).commit();
     }
