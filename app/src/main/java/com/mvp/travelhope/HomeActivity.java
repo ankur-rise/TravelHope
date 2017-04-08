@@ -1,15 +1,12 @@
 package com.mvp.travelhope;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,13 +15,13 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        });
+
+        inflateFragment();
+
+    }
+
+    private void inflateFragment() {
+        getFragmentManager().beginTransaction().add(R.id.container, HomeFragment.newInstance()).commit();
     }
 
     @Override
@@ -47,5 +44,12 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // argument recommendation is to define type of search like if true the we'll show user to choose origin and on
+    // behalf of that we'll show a list of destination nearby if false then user know where to go.
+    @Override
+    public void onOptionSelected(boolean recommendation) {
+        
     }
 }
