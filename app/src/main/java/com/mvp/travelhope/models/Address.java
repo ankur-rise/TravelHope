@@ -22,4 +22,7 @@ public class Address {
     public void setCityList(List<City> cityList) {
         this.cityList = cityList;
     }
+
+
+
 }

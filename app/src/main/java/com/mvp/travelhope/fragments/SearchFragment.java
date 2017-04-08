@@ -47,7 +47,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = new SearchPresenter(this);
+        mPresenter = new SearchPresenter(this, getActivity());
     }
 
     @Override
@@ -100,7 +100,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mPresenter.searchForText(true);
+                mPresenter.searchForText(s.toString(), true);
         }
 
         @Override
@@ -117,7 +117,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            mPresenter.searchForText(false);
+            mPresenter.searchForText(s.toString(), false);
         }
 
         @Override
