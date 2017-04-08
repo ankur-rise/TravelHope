@@ -8,12 +8,17 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 import com.mvp.travelhope.R;
+import com.mvp.travelhope.adapter.CityAdapter;
 import com.mvp.travelhope.contracts.SearchContract;
+import com.mvp.travelhope.models.City;
 import com.mvp.travelhope.presenters.SearchPresenter;
+
+import java.util.List;
 
 
 /**
@@ -24,6 +29,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
     private OnFragmentInteractionListener mListener;
     private AutoCompleteTextView mOrigin, mDestination;
     private SearchPresenter mPresenter;
+    private CityAdapter mOriginCityAdapter, mDestinationCityAdapter;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -100,7 +106,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mPresenter.searchForText(s.toString(), true);
+            mPresenter.searchForText(s.toString(), true);
         }
 
         @Override
@@ -125,6 +131,28 @@ public class SearchFragment extends Fragment implements SearchContract.View {
 
         }
     };
+
+    @Override
+    public void updateOriginCityList(List<City> cityList) {
+        if (mOriginCityAdapter == null) {
+            mOriginCityAdapter = new CityAdapter(cityList, getActivity());
+            mOrigin.setAdapter(mOriginCityAdapter);
+        }else{
+            mOriginCityAdapter.notifyDataSetChanged();
+        }
+
+
+    }
+
+    @Override
+    public void updateDestinationCityList(List<City> cityList) {
+        if (mDestinationCityAdapter == null) {
+            mDestinationCityAdapter = new CityAdapter(cityList, getActivity());
+            mOrigin.setAdapter(mDestinationCityAdapter);
+        }else{
+            mDestinationCityAdapter.notifyDataSetChanged();
+        }
+    }
 
     /**
      * This interface must be implemented by activities that contain this
