@@ -1,9 +1,9 @@
 package com.mvp.travelhope.fragments;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +20,6 @@ import com.mvp.travelhope.R;
  * create an instance of this fragment.
  */
 public class SearchFragment extends Fragment {
-
     private static final String KEY_RECOMMENDATION = "recommendations";
     private OnFragmentInteractionListener mListener;
 
@@ -53,6 +52,20 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            boolean recommendation = bundle.getBoolean(KEY_RECOMMENDATION);
+            if (!recommendation) {
+                view.findViewById(R.id.iv_nav).setVisibility(View.GONE);
+                view.findViewById(R.id.et_destination).setVisibility(View.GONE);
+            }
+        }
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

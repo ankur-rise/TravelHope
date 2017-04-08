@@ -6,4 +6,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="plz_enter_origin">Please enter the origin</string>
+    <string name="plz_enter_destination">Please enter the destination</string>
 </resources>

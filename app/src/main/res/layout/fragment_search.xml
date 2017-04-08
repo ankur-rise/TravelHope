@@ -1,13 +1,42 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.mvp.travelhope.fragments.SearchFragment">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/activity_horizontal_margin"
+                tools:context="com.mvp.travelhope.fragments.SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <EditText
+        android:id="@+id/et_origin"
+        style="@style/search_edit_text"
+        android:hint="@string/plz_enter_origin"
+        />
+
+    <ImageView
+        android:id="@+id/iv_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_origin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:src="@drawable/ic_more_vert_black_24dp"
+        android:tint="@color/colorPrimary"/>
+
+    <EditText
+        android:id="@+id/et_destination"
+        style="@style/search_edit_text"
+        android:layout_below="@+id/iv_nav"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:hint="@string/plz_enter_destination"
+        />
+
+    <Button
+        android:id="@+id/btn_search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:text="Show me options"
+        android:textColor="@color/white"/>
 
-</FrameLayout>
+</RelativeLayout>

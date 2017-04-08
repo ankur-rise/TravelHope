@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import com.mvp.travelhope.fragments.HomeFragment;
 import com.mvp.travelhope.R;
+import com.mvp.travelhope.fragments.SearchFragment;
 
 public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener {
 
@@ -52,6 +53,11 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     // behalf of that we'll show a list of destination nearby if false then user know where to go.
     @Override
     public void onOptionSelected(boolean recommendation) {
-        
+        inflateSearchFragment(recommendation);
+    }
+
+    private void inflateSearchFragment(boolean recommendation) {
+        getFragmentManager().beginTransaction().replace(R.id.container, SearchFragment.newInstance(recommendation))
+                .addToBackStack(null).commit();
     }
 }

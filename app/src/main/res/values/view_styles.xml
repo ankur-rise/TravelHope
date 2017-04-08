@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="app_edit_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="search_edit_text" parent="app_edit_text">
+        <item name="android:drawablePadding">@dimen/activity_horizontal_margin</item>
+        <item name="android:drawableLeft">@drawable/ic_business_black_24dp</item>
+        <item name="android:drawableTint">@color/colorPrimary</item>
+    </style>
+
+</resources>
