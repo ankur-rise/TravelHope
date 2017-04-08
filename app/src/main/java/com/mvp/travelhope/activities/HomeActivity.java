@@ -1,10 +1,13 @@
-package com.mvp.travelhope;
+package com.mvp.travelhope.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.mvp.travelhope.fragments.HomeFragment;
+import com.mvp.travelhope.R;
 
 public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener {
 
@@ -17,7 +20,6 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
 
 
         inflateFragment();
-
     }
 
     private void inflateFragment() {

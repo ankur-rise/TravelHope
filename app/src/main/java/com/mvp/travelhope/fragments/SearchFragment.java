@@ -1,26 +1,30 @@
-package com.mvp.travelhope;
+package com.mvp.travelhope.fragments;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.mvp.travelhope.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HomeFragment.OnFragmentInteractionListener} interface
+ * {@link SearchFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link HomeFragment#newInstance} factory method to
+ * Use the {@link SearchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class SearchFragment extends Fragment {
+
+    private static final String KEY_RECOMMENDATION = "recommendations";
     private OnFragmentInteractionListener mListener;
 
-    public HomeFragment() {
+    public SearchFragment() {
         // Required empty public constructor
     }
 
@@ -28,11 +32,14 @@ public class HomeFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment HomeFragment.
+     * @param recommendations .
+     * @return A new instance of fragment SearchFragment.
      */
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-
+    public static SearchFragment newInstance(boolean recommendations) {
+        SearchFragment fragment = new SearchFragment();
+        Bundle args = new Bundle();
+        args.putBoolean(KEY_RECOMMENDATION, recommendations);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -45,9 +52,15 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -76,7 +89,7 @@ public class HomeFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-
-        void onOptionSelected(boolean recommendation);
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
 }

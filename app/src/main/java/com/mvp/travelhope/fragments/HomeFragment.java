@@ -1,28 +1,31 @@
-package com.mvp.travelhope;
+package com.mvp.travelhope.fragments;
 
+import android.app.Fragment;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.mvp.travelhope.R;
+import com.mvp.travelhope.contracts.HomeContract;
+import com.mvp.travelhope.presenters.HomePresenter;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SearchFragment.OnFragmentInteractionListener} interface
+ * {@link HomeFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SearchFragment#newInstance} factory method to
+ * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchFragment extends Fragment {
-
-    private static final String ARG_PARAM1 = "recommendations";
+public class HomeFragment extends Fragment implements HomeContract.View, View.OnClickListener {
     private OnFragmentInteractionListener mListener;
+    private HomePresenter mPresenter;
+    private boolean mRecommendation;
 
-    public SearchFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
@@ -30,34 +33,32 @@ public class SearchFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param recommendations .
-     * @return A new instance of fragment SearchFragment.
+     * @return A new instance of fragment HomeFragment.
      */
-    public static SearchFragment newInstance(boolean recommendations) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putBoolean(ARG_PARAM1, recommendations);
-        fragment.setArguments(args);
+    public static HomeFragment newInstance() {
+        HomeFragment fragment = new HomeFragment();
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mPresenter = new HomePresenter(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        view.findViewById(R.id.btn_direct).setOnClickListener(this);
+        view.findViewById(R.id.btn_places_near_me).setOnClickListener(this);
     }
 
     @Override
@@ -76,6 +77,30 @@ public class SearchFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_direct:
+                mRecommendation=false;
+                mPresenter.gotoOption();
+                break;
+            case R.id.btn_places_near_me:
+                mRecommendation = true;
+                mPresenter.gotoOption();
+                break;
+        }
+    }
+
+    @Override
+    public boolean getRecommendation() {
+        return mRecommendation;
+    }
+
+    @Override
+    public void moveToOption(boolean recommendation) {
+            mListener.onOptionSelected(isResumed());
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -87,7 +112,7 @@ public class SearchFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+
+        void onOptionSelected(boolean recommendation);
     }
 }
